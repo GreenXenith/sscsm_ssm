@@ -26,12 +26,13 @@ end
 -- Prepare clientmods for sending
 function sscsm.register_mod(modname)
 	local files = {}
-	local modpath = minetest.get_modpath(modname) .. "/client/"
+	local modpath = minetest.get_modpath(modname)
 
 	local exists = false
 	for _, dir in pairs(minetest.get_dir_list(modpath, true)) do if dir == "client" then exists = true end end
 	assert(exists, "Could not find client directory in mod '" .. modname .. "'.")
 
+	modpath = modpath .. "/client/"
 	for _, path in pairs(get_files(modpath)) do
 		local file = io.open(path, "rb")
 		local filename = path:sub(modpath:len() + 2)
